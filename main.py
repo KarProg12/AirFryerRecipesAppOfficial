@@ -19,7 +19,7 @@ def nothing_to_add() -> None:
     print("!!! Nothing to add !!!")
 
 
-def add_recipe(name, content):
+def add_recipe(name, content) -> None:
     recipes[name] = content
 
 
