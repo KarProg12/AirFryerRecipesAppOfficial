@@ -15,7 +15,7 @@ manual_menu = """
 > Type ['/shall'] to display all recipes in table."""
 
 
-def nothing_to_add():
+def nothing_to_add() -> None:
     print("!!! Nothing to add !!!")
 
 
@@ -24,7 +24,7 @@ def add_recipe(name, content):
 
 
 # Print all recipes in table
-def print_all_recipes_in_table():
+def print_all_recipes_in_table() -> None:
     """Display table-formatted recipes"""
     if not recipes:
         print("\n!!! There's no recipes yet !!!")
@@ -37,15 +37,14 @@ def print_all_recipes_in_table():
               f"{formatted_recipe}\n--------------------------")
 
 
-def print_user_manual():
+def print_user_manual() -> None:
     print(manual_menu)
 
 
-def format_error():
+def format_error() -> None:
     format_communicate = """\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 !!! ERROR: Read the prompt above !!!"""
     print(format_communicate)
-    return
 
 
 # Main app loop
