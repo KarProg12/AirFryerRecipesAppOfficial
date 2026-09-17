@@ -38,23 +38,29 @@ def add_recipe(name, content) -> None:
 
 def del_recipe() -> None:
     """Deletes the recipe by name"""
-    # Check if there are no recipes yet
     if not recipes:
         print("\n!!! There's no recipes yet !!!")
         return
 
-    # Pass the user input to the function's argument
-    recipe_name_to_del = input("\n>>>  Enter recipe name to delete\n>>> ").strip().lower()
+    name_of_recipe = input("\n>>> Enter recipe name to delete\n>>> ").strip().lower()
 
-    # Save the popped recipe do variable to display later
-    deleted_recipe = recipes.pop(recipe_name_to_del, None)
+    # First try to delete recipe if user's input is accurate
+    deleted_recipe = recipes.pop(name_of_recipe, None)
 
-    # Check for default value from .pop()
+    # If user's input is accurate end the func
     if deleted_recipe is not None:
-        print(f"\n> Successfully removed: {recipe_name_to_del.capitalize()} <")
+        print(f"\n> Successfully removed: {name_of_recipe.capitalize()} <")
+        return
 
-    else:
-        print(f"\n!!! Error 404: Not found: {recipe_name_to_del.capitalize()} !!!")
+    # If user's input was not accurate search for similar matches
+    matches = difflib.get_close_matches(name_of_recipe, recipes.keys(), cutoff=0.5)
+
+    print(f"\n!!! Error 404: Not found: {name_of_recipe.capitalize()} !!!")
+
+    if matches:
+        print("??? Did you mean one of these:")
+        for match in matches:
+            print(f"  > {match.capitalize()}")
 
 def search_recipe() -> None:
     """Searches precisely recipe by its name"""
