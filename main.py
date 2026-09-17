@@ -12,6 +12,7 @@ Type ['/help'] to show available commands.
 \n>>> """
 
 def nothing_to_add() -> None:
+    """Func that displays communicate 'Nothing to add'"""
     print("\n!!! Nothing to add !!!")
 
 def format_error() -> None:
@@ -28,9 +29,11 @@ user_help_menu = """
    (SUGGESTION: first type ['/shall'] to show what's the name of the recipe)."""
 
 def print_user_manual() -> None:
+    """Func for displaying user manual"""
     print(user_help_menu)
 
 def add_recipe(name, content) -> None:
+    """Func for adding recipes"""
     recipes[name] = content
 
 def del_recipe() -> None:
@@ -92,7 +95,7 @@ def print_all_recipes_in_table() -> None:
 
 
 
-# Main app loop
+# ---MAIN-APP-LOOP---
 while True:
 
     try:
