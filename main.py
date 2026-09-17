@@ -1,27 +1,81 @@
 import textwrap
+import difflib
 
 recipes = {}
 
 prompt = f"""\n-----------------------------------------------------
 Enter the recipe in this order:
   'KEY: recipe_name' : 'VALUE: recipe_content'
-Type ['/man'] to show user manual.
+Type ['/help'] to show available commands.
 -----------------------------------------------------
 [~! REMEMBER ABOUT CORRECT recipe FORMAT !~]
-\n>>>"""
-
-manual_menu = """
-> Type ['/end'] or ['/exit'] to escape the program.
-> Type ['/shall'] to display all recipes in table."""
-
+\n>>> """
 
 def nothing_to_add() -> None:
-    print("!!! Nothing to add !!!")
+    print("\n!!! Nothing to add !!!")
 
+def format_error() -> None:
+    format_communicate = """\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+!!! ERROR: Read the prompt above !!!"""
+    print(format_communicate)
+
+user_help_menu = """
+> Type ['/end'] or ['/exit'] to escape the program.
+> Type ['/shall'] to display all recipes in table.
+> Type ['/find'] or [/'search'] to search the recipe (with close matches and allowing typos)
+> Type ['/del'], ['/delete'] or ['/rm'] 
+   to enter the deleting by name mode 
+   (SUGGESTION: first type ['/shall'] to show what's the name of the recipe)."""
+
+def print_user_manual() -> None:
+    print(user_help_menu)
 
 def add_recipe(name, content) -> None:
     recipes[name] = content
 
+def del_recipe() -> None:
+    """Deletes the recipe by name"""
+    # Check if there are no recipes yet
+    if not recipes:
+        print("\n!!! There's no recipes yet !!!")
+        return
+
+    # Pass the user input to the function's argument
+    recipe_name_to_del = input("\n>>>  Enter recipe name to delete\n>>> ").strip().lower()
+
+    # Save the popped recipe do variable to display later
+    deleted_recipe = recipes.pop(recipe_name_to_del, None)
+
+    # Check for default value from .pop()
+    if deleted_recipe is not None:
+        print(f"\n> Successfully removed: {recipe_name_to_del.capitalize()} <")
+
+    else:
+        print(f"\n!!! Error 404: Not found: {recipe_name_to_del.capitalize()} !!!")
+
+def search_recipe() -> None:
+    """Searches precisely recipe by its name"""
+    # Check if there's no recipes
+    if not recipes:
+        print("\n!!! There's no recipes yet !!!")
+        return
+
+    # Store the input in search_query variable
+    search_query = input("\n>>> Enter the recipe name to search (allows typos)\n>>> ")
+
+    # matches = close matches to search_query(input) searching in the names(keys)
+    # of recipes with precision 0.5 (min = 0, max = 1)
+    matches = difflib.get_close_matches(search_query, recipes.keys(), cutoff=0.5)
+
+    # If there are matches
+    if matches:
+        print("\n??? Did you mean:")
+        # Display close formatted matches
+        for match in matches:
+            print(f"\n> {match.capitalize()}:\n  {recipes[match]}")
+    # If there's no matches
+    else:
+        print(f"\n!!! No close matches for {search_query.capitalize()} found !!!")
 
 # Print all recipes in table
 def print_all_recipes_in_table() -> None:
@@ -37,51 +91,43 @@ def print_all_recipes_in_table() -> None:
               f"{formatted_recipe}\n--------------------------")
 
 
-def print_user_manual() -> None:
-    print(manual_menu)
-
-
-def format_error() -> None:
-    format_communicate = """\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-!!! ERROR: Read the prompt above !!!"""
-    print(format_communicate)
-
 
 # Main app loop
 while True:
 
     try:
         # .strip() deletes unwanted spaces at the beginning and at the end
-        user_cmd = input(prompt).strip()
+        user_cmd = input(prompt).strip().lower()
     # If user's input is Ctrl + C or Ctr + D escape the program without any errors and print summary of recipes
     except(EOFError, KeyboardInterrupt):
         print('\n---------------------\n>> Escaped program <<\n---------------------')
         print(f"\n@| You've added {len(recipes)} recipe/s |@")
         break
 
-
     # ---COMMANDS-CHECKS---
-    # Check for program exiting command
-    if user_cmd.lower() == '/end' or user_cmd.lower() == '/exit':
-        print('\n---------------------\n>> Escaped program <<\n---------------------')
-        print(f"\n@| You've added {len(recipes)} recipe/s |@")
-        break
+    match user_cmd:
+        case '/end' | '/exit':
+            print('\n---------------------\n>> Escaped program <<\n---------------------')
+            print(f"\n@| You've added {len(recipes)} recipe/s |@")
+            break
+        case '/help':
+            print_user_manual()
+            continue
+        case '/shall':
+            print_all_recipes_in_table()
+            continue
+        case '/search' | '/find':
+            search_recipe()
+            continue
+        case '/delete' | '/del' | '/rm':
+            del_recipe()
+            continue
 
-    # Display all recipes in table (for now it is primitive)
-    elif user_cmd.lower() == '/shall':
-        print_all_recipes_in_table()
-        continue
-
-    # Check for /man (user manual command)
-    elif user_cmd.lower() == '/man':
-        print_user_manual()
-        continue
-
-    # ---ERRORS-PREDICTING---
-    # Check for white spaces
-    if user_cmd == '':
-        nothing_to_add()
-        continue
+        # ---ERRORS-PREDICTING---
+        # Check for white spaces
+        case '':
+            nothing_to_add()
+            continue
 
     # If ":" is not in user's input print error about incorrect recipe format
     if ":" not in user_cmd:
