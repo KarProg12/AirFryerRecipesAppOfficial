@@ -66,17 +66,15 @@ def del_recipe() -> None:
     print(f"\n!!! Error 404: Not found: {name_of_recipe.capitalize()} !!!")
 
     if matches:
-<<<<<<< Updated upstream
         confirm = input(f"\n??? Did you mean {matches[0].capitalize()}? [y/N]\n>>> ").strip().lower()
         # If user confirms delete the recipe
         if confirm in ['y', 'yes']:
             recipes.pop(matches[0])
             print(f"\n> Successfully removed: {matches[0].capitalize()} <")
-=======
+
         print("\n??? Did you mean:\n=================")
         for match in matches:
             print(f"  > {match.capitalize()}")
->>>>>>> Stashed changes
 
 def search_by_name() -> None:
     """Searches precisely recipe by its name"""
@@ -102,8 +100,6 @@ def search_by_name() -> None:
         print(f"\n!!! Error 404: Not found: {search_query} !!!")
 
 def search_by_ingredient() -> None:
-<<<<<<< Updated upstream
-=======
     if not recipes:
         no_recipes()
         return
@@ -117,27 +113,6 @@ def search_by_ingredient() -> None:
         for match in matches:
             print(f"\n> {match}")
     else:
-        print(f"\n!!! Error 404: Not found: {search_query} !!!")
-
-# Print all recipes in table
-def print_all_recipes_in_table() -> None:
-    """Display table-formatted recipes"""
->>>>>>> Stashed changes
-    if not recipes:
-        no_recipes()
-        return
-
-    search_query = input("\n>>> Enter the recipe's ingredient you want to search (allows typos)\n>>> ").strip().lower()
-    found = False
-
-    print("\n??? Did you mean:\n=================")
-    for name, content in recipes.items():
-        words = [word.strip(".,;:!?") for word in content.lower().split()]
-        if search_query in content.lower() or difflib.get_close_matches(search_query, words, cutoff=0.6):
-            print(f"\n> {name.capitalize()}:\n  {content}")
-            found = True
-
-    if not found:
         print(f"\n!!! Error 404: Not found: {search_query} !!!")
 
 # Print all recipes in table
