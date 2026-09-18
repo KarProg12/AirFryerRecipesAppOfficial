@@ -1,14 +1,19 @@
 import textwrap
 import difflib
 
+def greeting():
+    print("\n$$$ WELCOME TO THE AIR FRYER RECIPE APP $$$")
+
 recipes = {}
 
-prompt = f"""\n-----------------------------------------------------
+greeting()
+
+prompt = f"""\n---------------------------------------------------------
 Enter the recipe in this order:
   'KEY: recipe_name' : 'VALUE: recipe_content'
 Type ['/help'] to show available commands.
 You can also search in recipes or in recipes ingredients.
------------------------------------------------------
+---------------------------------------------------------
 [~! REMEMBER ABOUT CORRECT recipe FORMAT !~]
 \n>>> """
 
