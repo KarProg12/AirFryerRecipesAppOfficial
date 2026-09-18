@@ -61,7 +61,7 @@ def del_recipe() -> None:
     print(f"\n!!! Error 404: Not found: {name_of_recipe.capitalize()} !!!")
 
     if matches:
-        confirm = input(f"\n??? Did you mean {matches[0].capitalize()}? [y/N]\n>>> ").strip().lower()
+        confirm = input(f"\n??? Did you mean: '{matches[0].capitalize()}'? [y/N]\n>>> ").strip().lower()
         # If user confirms delete the recipe
         if confirm in ['y', 'yes']:
             recipes.pop(matches[0])
