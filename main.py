@@ -27,13 +27,8 @@ def print_format_error() -> None:
 user_help_menu = """
 > Type ['/end'] or ['/exit'] to escape the program.
 > Type ['/shall'] to display all recipes in table.
-<<<<<<< Updated upstream
-> Type ['/nameSearch'] to search the recipe by its name. 
-> Type ['/ingrSearch'] to search in the recipes by ingredients.
-=======
 > Type ['/nameSearch'] to search the recipe by its name 
 > Type ['/ingrSearch'] to search in the recipes by ingredients
->>>>>>> Stashed changes
 > Type ['/del'], ['/delete'] or ['/rm'] 
     to enter the deleting by name mode."""
 
