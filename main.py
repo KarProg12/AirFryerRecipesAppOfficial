@@ -72,9 +72,8 @@ def del_recipe() -> None:
             recipes.pop(matches[0])
             print(f"\n> Successfully removed: {matches[0].capitalize()} <")
 
-        print("\n??? Did you mean:\n=================")
-        for match in matches:
-            print(f"  > {match.capitalize()}")
+        else:
+            print("\n>> Removal cancelled <<")
 
 def search_by_name() -> None:
     """Searches precisely recipe by its name"""
