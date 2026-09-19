@@ -94,7 +94,7 @@ def search_by_name() -> None:
         print("\n??? Did you mean:\n=================")
         # Display close formatted matches
         for match in matches:
-            print(f"\n> {match.capitalize()}:\n  {recipes[match]}")
+            print(f"\n> {match.capitalize()}:\n\t{recipes[match]}")
     else:
         print(f"\n!!! Error 404: Not found: {search_query} !!!")
 
@@ -105,12 +105,20 @@ def search_by_ingredient() -> None:
 
     search_query = input("\n>>> Enter the recipe's ingredient you want to search (allows typos)\n>>> ").strip().lower()
 
-    matches = difflib.get_close_matches(search_query, recipes.values(), cutoff=0.5)
+    # List of found accurate matches
+    matches = []
+
+    # Iteration by every recipe in recipes
+    for name, content in recipes.items():
+        # If there is accurate input or difflib has found close matches
+        if search_query in content.lower() or difflib.get_close_matches(search_query, content.lower().split(), cutoff=0.6):
+            # Add recipe name and content to matches list as a tuple
+            matches.append((name, content))
 
     if matches:
         print("\n??? Did you mean:\n=================")
-        for match in matches:
-            print(f"\n> {match}")
+        for name, content in matches:
+            print(f"\n> {name.capitalize()}:\n\t{content}")
     else:
         print(f"\n!!! Error 404: Not found: {search_query} !!!")
 

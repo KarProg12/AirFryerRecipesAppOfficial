@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c5364741-06ff-41e4-b42b-4d4b3cb22a57" name="Changes" comment="Add greeting">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="c5364741-06ff-41e4-b42b-4d4b3cb22a57" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/AirFryerRecipesAppOfficial.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/AirFryerRecipesAppOfficial.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -73,40 +73,9 @@
       <option name="presentableId" value="Default" />
       <updated>1789054036983</updated>
     </task>
-    <task id="LOCAL-00001" summary="Update official code">
-      <option name="closed" value="true" />
-      <created>1789742248255</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1789742248255</updated>
-    </task>
-    <task id="LOCAL-00002" summary="Update official code. Fix formatting error in del_recipe func">
-      <option name="closed" value="true" />
-      <created>1789754891005</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1789754891009</updated>
-    </task>
-    <task id="LOCAL-00003" summary="Add greeting">
-      <option name="closed" value="true" />
-      <created>1789755178779</created>
-      <option name="number" value="00003" />
-      <option name="presentableId" value="LOCAL-00003" />
-      <option name="project" value="LOCAL" />
-      <updated>1789755178779</updated>
-    </task>
-    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Update official code" />
-    <MESSAGE value="Update official code. Fix formatting error in del_recipe func" />
-    <MESSAGE value="Add greeting" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add greeting" />
   </component>
 </project>
